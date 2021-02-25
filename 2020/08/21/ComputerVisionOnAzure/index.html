@@ -1,0 +1,663 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="欢迎来到技术的密港">
+  <meta name="author" content="Hackerbox">
+  <meta name="keywords" content="Hacbox,C#,unity,c,c++,罐头盒,灰域行者,game">
+  <title>微软视觉API初体验 - 灰域行者的罐头盒</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/tomorrow-night.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"hacbox.me","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"§"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>罐头盒</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/posthead1.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="微软视觉API初体验">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      Hackerbox
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-08-21 23:36" pubdate>
+        2020年8月21日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      37
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">微软视觉API初体验</h1>
+            
+            <div class="markdown-body">
+              <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>构建复杂的图像处理和分析引擎非常昂贵。 一种替代方法是使用 Microsoft 的计算机视觉 API。 在本手册中，我们将探讨此 API 提供的功能，并调用该功能处理一些图像。</p>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ol>
+<li>Azure账户——创建“计算机视觉”服务</li>
+<li>Python/C#/Java/Go/Js 开发环境（非必须）</li>
+</ol>
+<hr>
+<p> <strong>作者在开始编写这个手册的时候并未深入学习python，只使用了Azure Cloud Shell对该API进行了调试和使用，如果你也还没掌握python又想体验微软视觉API的功能，请继续参阅本手册，否则建议在<a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/azure/cognitive-services/computer-vision/quickstarts-sdk/client-library?pivots=programming-language-python">微软官方手册</a>，查找更多教程！</strong></p>
+<hr>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><h3 id="1-启动Cloud-Shell"><a href="#1-启动Cloud-Shell" class="headerlink" title="1. 启动Cloud Shell"></a>1. 启动Cloud Shell</h3><p>打开Azure控制台，点击右上角的“Azure Cloud Shell”<br><img src="https://cdn.jsdelivr.net/gh/xX-Hacbox-Xx/Hacbox/pic_bed/blog_pic/TIM20200609162333.png" srcset="/img/loading.gif" alt="Azure控制台"><br>这里会出现选择配置环境，建议选择PowerShell</p>
+<p>如果是第一次配置，会出现下面的提示，打开左边的“高级选项”<br><img src="https://cdn.jsdelivr.net/gh/xX-Hacbox-Xx/Hacbox/pic_bed/blog_pic/TIM20200609162333-1.png" srcset="/img/loading.gif" alt="创建存储"></p>
+<p>这里的配置按照自己的喜好来即可，注意：</p>
+<ul>
+<li>区域一定要选择你当前所在的区域；</li>
+<li>存储账户名称的长度必须在 3 到 24 个字符之间，并且只能使用数字和小写字母；</li>
+<li>用户设置文件共享名称只能包含小写字母、数字和连字符，并且必须以字母或数字开头。该名称不能包含两个连续的连字符；<br><img src="https://cdn.jsdelivr.net/gh/xX-Hacbox-Xx/Hacbox/pic_bed/blog_pic/TIM20200609162333-2.png" srcset="/img/loading.gif" alt="创建存储"><br>之后点击“创建存储”，稍等片刻</li>
+</ul>
+<p><em>有可能会报错，多半是命名不合法，按照提示修改即可</em></p>
+<h3 id="2-创建认知服务帐户"><a href="#2-创建认知服务帐户" class="headerlink" title="2. 创建认知服务帐户"></a>2. 创建认知服务帐户</h3><p>等待Cloud Shell加载完成，显示欢迎信息则说明成功创建。<br><img src="https://cdn.jsdelivr.net/gh/xX-Hacbox-Xx/Hacbox/pic_bed/blog_pic/TIM202006091623333.png" srcset="/img/loading.gif" alt="认知服务帐户"><br><em>上方的四行数据建议另存至记事本方便查询</em></p>
+<p>我们需要 API 访问密钥来调用计算机视觉 API。 要获取访问密钥，我们需要一个计算机视觉 API 的认知服务帐户。 我们将使用 <code>az cognitiveservices create</code> 在订阅中创建帐户。</p>
+<p>命令 <code>az cognitiveservices create</code> 用于在资源组中创建认知服务帐户。 调用此命令时，必须提供以下五个参数。</p>
+<table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">resource-group</td>
+<td align="left">将拥有认知服务帐户的资源组，<strong>和前面创建的存储账户信息一致。</strong></td>
+</tr>
+<tr>
+<td align="left">kind</td>
+<td align="left">认知服务帐户的 API 名称。 针对此练习为“计算机视觉”，但可以基于内容审查器、人脸 API 等。</td>
+</tr>
+<tr>
+<td align="left">name</td>
+<td align="left">认知服务帐户名称</td>
+</tr>
+<tr>
+<td align="left">sku</td>
+<td align="left">认知服务帐户的 Sku（库存单位）。 针对此练习为 F0（免费层），但可以是 F0、S1、S2、S3 或 S4。<em>（S层都是收费层）</em></td>
+</tr>
+<tr>
+<td align="left">location</td>
+<td align="left">要从中调用此 API 的位置或区域， <strong>和前面创建的存储账户信息一致。</strong></td>
+</tr>
+</tbody></table>
+<p>将下面这段代码输入控制台：</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">az cognitiveservices account create<br>--kind ComputerVision<br>--name ComputerVisionService<br>--sku F0<br>--resource-group Demo_ComputerVision<br>--location southeastasia<br></code></pre></div></td></tr></table></figure>
+<p>我们为 <code>ComputerVision API</code> 创建了认知服务帐户。 我们选择了 <code>F0 SKU</code> 并将帐户命名为<code>“ComputerVisionService”</code>。 我们的帐户属于资源组 <code>Demo_ComputerVision</code>，并且我们将从在 <code>location</code> 参数中设置的位置调用 API。</p>
+<p>命令完成认知服务帐户的创建后，你会获得 JSON 响应，其中包括已设置为“成功”的“provisioningState”属性。<br><img src="https://cdn.jsdelivr.net/gh/xX-Hacbox-Xx/Hacbox/pic_bed/blog_pic/TIM202006091623334.png" srcset="/img/loading.gif" alt="创建认知服务帐户"></p>
+<h3 id="3-获取访问密钥"><a href="#3-获取访问密钥" class="headerlink" title="3. 获取访问密钥"></a>3. 获取访问密钥</h3><p>成功创建帐户后，我们可以检索此帐户的订阅密钥或访问密钥。</p>
+<ol>
+<li>在 Azure Cloud Shell 中执行以下命令</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">az cognitiveservices account keys list <br>--name ComputerVisionService <br>--resource-group Demo_ComputerVision <br></code></pre></div></td></tr></table></figure>
+
+<p>上述命令将返回与名为“ComputerVisionService”的认知服务帐户相关联的密钥，该帐户属于给定的资源组。 它将返回两个密钥 - 其中一个是备用密钥。 密钥很难记住，因此我们将第一个密钥存储在变量中，以便将变量用于对 API 的所有调用。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xX-Hacbox-Xx/Hacbox/pic_bed/blog_pic/TIM202006091623335.png" srcset="/img/loading.gif" alt="获取访问密钥"></p>
+<p>2.简化密钥，在 Azure Cloud Shell 中执行以下命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash">key=$(az cognitiveservices account keys list</span><br>--name ComputerVisionService<br>--resource-group Demo_ComputerVision<br>--query key1 -o tsv)<br></code></pre></div></td></tr></table></figure>
+
+<p>Azure CLI 2.0 使用 –query 参数对命令的结果执行 JMESPath 查询。 JMESPath 是用于 JSON 的查询语言，提供从 CLI 输出中选择和显示数据的能力。 这些查询在任何显示格式化之前针对 JSON 输出执行。 Azure CLI 中的所有命令均支持 –query 参数。</p>
+<p>在本示例中，我们查询名为“key1”条目的密钥列表，并将结果输出为“tsv”格式。 此格式删除字符串值周围的引号。 我们将结果分配给变量密钥。</p>
+<ol start="3">
+<li>要查看密钥的值，请在 Azure Cloud Shell 中执行以下命令<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">echo $key<br></code></pre></div></td></tr></table></figure>
+<h5 id="现在，我们有帐户和密钥，可对-API-执行一些调用了！"><a href="#现在，我们有帐户和密钥，可对-API-执行一些调用了！" class="headerlink" title="现在，我们有帐户和密钥，可对 API 执行一些调用了！"></a>现在，我们有帐户和密钥，可对 API 执行一些调用了！</h5><h2 id="使用API"><a href="#使用API" class="headerlink" title="使用API"></a>使用API</h2><h3 id="1-识别图像中的特征点"><a href="#1-识别图像中的特征点" class="headerlink" title="1. 识别图像中的特征点"></a>1. 识别图像中的特征点</h3>让我们首先找到图像中的特征点。 我们将在此示例中使用下面的图像，但你可以随意尝试对其他图像的 URL 使用相同的命令。<br><img src="https://cdn.jsdelivr.net/gh/xX-Hacbox-Xx/Hacbox/pic_bed/blog_pic/illust_66933557_20200603_202939.jpg" srcset="/img/loading.gif" alt="素材"><br>在 <code>Azure Cloud Shell</code> 中执行以下命令。 将命令中的 <code>&lt;region&gt;</code> 替换为认知服务帐户的区域。</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">curl &quot;https://southeastasia.api.cognitive.microsoft.com/vision/v2.0/analyze?visualFeatures=Categories,Description&amp;details=Landmarks&quot;  <br>-H &quot;Ocp-Apim-Subscription-Key: $key&quot; <br>-H &quot;Content-Type: application/json&quot; <br>-d &quot;&#123;&#x27;url&#x27;:&#x27;https://hacboxstudio.azurewebsites.net/wp-content/uploads/2020/06/illust_66933557_20200603_202939-300x169.jpg&#x27;&#125;&quot; <br>| jq &#x27;.&#x27;<br></code></pre></div></td></tr></table></figure>
+
+<p>其中的<code>Ocp-Apim-Subscription-Key</code>后面可以直接输入我们的密钥key1的值，也可以使用声明的变量<code>key</code><br><img src="https://cdn.jsdelivr.net/gh/xX-Hacbox-Xx/Hacbox/pic_bed/blog_pic/TIM202006091623337.png" srcset="/img/loading.gif" alt="输出结果"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xX-Hacbox-Xx/Hacbox/pic_bed/blog_pic/TIM202006091623336.png" srcset="/img/loading.gif" alt="输出结果"></p>
+<ul>
+<li>此调用会查找图像 URL 指定的图像中的特征点。我们现在分析的图像存储在本网页的存储库中。</li>
+<li>该调用还会要求服务返回图像的类别信息和说明。 返回的说明是一句英文，我们可以看到微软的API对这个图像分析的结果是</li>
+</ul>
+<blockquote>
+<p>“a group of people standing in front of a window”<br>可信度： 0.7655691527579038</p>
+</blockquote>
+<ul>
+<li>如你所知，每次调用 API 都需要访问密钥。 在请求的 Ocp-Apim-Subscription-Key 标头上进行此设置。<h3 id="2-检查图像中是否具有不适宜内容"><a href="#2-检查图像中是否具有不适宜内容" class="headerlink" title="2. 检查图像中是否具有不适宜内容"></a>2. 检查图像中是否具有不适宜内容</h3>在此示例中，我们将分析图像中的成人内容。 置信度分数对图像包含成人或不雅内容的可能性评分。</li>
+</ul>
+<p>我们将在此示例中使用下面的图像，但你可以随意尝试对其他图像的 URL 使用相同的命令。<br><img src="https://docs.microsoft.com/zh-cn/learn/advocates/create-computer-vision-service-to-classify-images/media/3-people.png" srcset="/img/loading.gif" alt="测试2"></p>
+<ol>
+<li>在 Azure Cloud Shell 中执行以下命令，替换 URL 中的 <code>&lt;region&gt;</code>。</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">curl &quot;https://&lt;region&gt;.api.cognitive.microsoft.com/vision/v2.0/analyze?visualFeatures=Adult,Description&quot; \<br>-H &quot;Ocp-Apim-Subscription-Key: $key&quot; \<br>-H &quot;Content-Type: application/json&quot; \<br>-d &quot;&#123;&#x27;url&#x27; : &#x27;https://raw.githubusercontent.com/MicrosoftDocs/mslearn-process-images-with-the-computer-vision-service/master/images/people.png&#x27;&#125;&quot; \<br>| jq &#x27;.&#x27;<br></code></pre></div></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/xX-Hacbox-Xx/Hacbox/pic_bed/blog_pic/TIM001.png" srcset="/img/loading.gif" alt="输出结果2"></p>
+<p>在此示例中，我们将 <code>visualFeatures</code> 设置为 <code>Adult,Description</code>。</p>
+<p>可以看到输出结果中多了两个参数，响应提供了两个置信度得分，一个针对不雅内容，另一个针对成人内容。 通过使用这些分数以及图像说明和其他可视功能，可以开始标记发布到服务器的图像。</p>
+<h3 id="3-调用计算机视觉-API-以生成缩略图"><a href="#3-调用计算机视觉-API-以生成缩略图" class="headerlink" title="3. 调用计算机视觉 API 以生成缩略图"></a>3. 调用计算机视觉 API 以生成缩略图</h3><p>计算机视觉首先生成高质量缩略图，然后通过分析图像中的对象来确定感兴趣区域 (ROI)。 然后，计算机视觉会裁剪图像以满足感兴趣区域的要求。 可以用户需求使用与原始图像的纵横比不同的纵横比显示生成的缩略图。 让我们看看该项目的运行情况。</p>
+<p><code>generateThumbnail</code> 操作将创建具有用户指定的宽度和高度的缩略图。 默认情况下，服务会分析图像，标识感兴趣区 (ROI)，并根据 ROI 生成智能裁剪坐标。 当指定不同于输入图像的纵横比时，智能裁剪非常有用。 请求 URI 的格式如下：</p>
+<p><code>https://&lt;region&gt;.api.cognitive.microsoft.com/vision/v2.0/generateThumbnail?width=&lt;...&gt;&amp;height=&lt;...&gt;&amp;smartCropping=&lt;...&gt;</code></p>
+<p>可将不同的参数提供给该 API，以生成符合需要的适当缩略图。 <code>width</code> 和 <code>height</code> 参数是必需的。 它们将让 API 知道特定图像的所需大小。 <code>smartCropping</code> 参数通过分析图像中的所需区域来生成更智能的裁剪，使裁剪部分保留在缩略图中。 例如，启用智能裁剪后，经裁剪的个人资料图片会使相关人员的人脸部分保留在图片框内，即使此图像具有不同的纵横比。</p>
+<h4 id="生成缩略图"><a href="#生成缩略图" class="headerlink" title="生成缩略图"></a>生成缩略图</h4><p>我们将在此示例中使用下面的图像，但你可以随意尝试对其他图像的 URL 使用相同的命令。<br><img src="https://docs.microsoft.com/zh-cn/learn/advocates/create-computer-vision-service-to-classify-images/media/4-dog.png" srcset="/img/loading.gif" alt="测试3"></p>
+<ol>
+<li>在 Azure Cloud Shell 中执行以下命令。 将命令中的 <code>&lt;region&gt;</code> 替换为认知服务帐户的区域</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">curl &quot;https://&lt;region&gt;.api.cognitive.microsoft.com/vision/v2.0/generateThumbnail?width=100&amp;height=100&amp;smartCropping=true&quot; \<br>-H &quot;Ocp-Apim-Subscription-Key: $key&quot; \<br>-H &quot;Content-Type: application/json&quot; \<br>-d &quot;&#123;&#x27;url&#x27; : &#x27;https://raw.githubusercontent.com/MicrosoftDocs/mslearn-process-images-with-the-computer-vision-service/master/images/dog.png&#x27;&#125;&quot; \<br>-o  thumbnail.jpg<br></code></pre></div></td></tr></table></figure>
+<p>在此示例中，我们将要求服务创建尺寸为 100x100 的缩略图。 智能裁剪已启用。 成功的响应包含缩略图二进制文件，我们会将其写入一个名为 thumbnail.jpg 的文件。</p>
+<h4 id="查看生成的缩略图"><a href="#查看生成的缩略图" class="headerlink" title="查看生成的缩略图"></a>查看生成的缩略图</h4><p>可以在 Azure Cloud Shell 存储帐户中找到生成的缩略图。 我们已将文件命名为 thumbnail.jpg。<br>按照以下说明，通过 Azure 门户下载缩略图。</p>
+<ol>
+<li><p>在 Azure Cloud Shell 中执行以下命令，确认主文件夹中存在文件 thumbnail.jpg。</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">cd ~<br>ls -l<br></code></pre></div></td></tr></table></figure></li>
+<li><p>执行以下命令，以将 <code>thumbnail.jpg</code> 移动到 <code>clouddrive</code> 文件夹。</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">mv ~/thumbnail.jpg ~/clouddrive<br></code></pre></div></td></tr></table></figure></li>
+<li><p>登录<a target="_blank" rel="noopener" href="https://portal.azure.com/">Azure 门户</a></p>
+</li>
+<li><p>在 Azure 门户菜单上或在门户主页中，选择“所有资源”，然后选择名称以 <code>cloudshell</code> 开头的存储帐户。</p>
+</li>
+<li><p>在存储帐户面板中，依次选择“存储资源管理器”、“文件共享”，再选择该集合中名称以 <code>cloudshellfiles</code> 开头的文件共享。</p>
+</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/xX-Hacbox-Xx/Hacbox/pic_bed/blog_pic/TIM002.png" srcset="/img/loading.gif" alt="下载缩略图"></p>
+<ol>
+<li>选择<code>“thunbnail.jpg”</code>文件，然后从顶部菜单单击“下载”以查看图像。</li>
+</ol>
+<p>生成的缩略图：<img src="https://cdn.jsdelivr.net/gh/xX-Hacbox-Xx/Hacbox/pic_bed/blog_pic/thumbnail11.jpg" srcset="/img/loading.gif" alt="缩略图"></p>
+<h3 id="4-从图像中检测并提取手写文字"><a href="#4-从图像中检测并提取手写文字" class="headerlink" title="4. 从图像中检测并提取手写文字"></a>4. 从图像中检测并提取手写文字</h3><p>我们将在此示例中使用下面的图像，但你可以随意尝试对其他图像的 URL 使用相同的命令。</p>
+<p><img src="https://docs.microsoft.com/zh-cn/learn/advocates/create-computer-vision-service-to-classify-images/media/6-handwriting.jpg" srcset="/img/loading.gif" alt="手写文字"></p>
+<ol>
+<li>在 Azure Cloud Shell 中执行以下命令。 将命令中的 <code>&lt;region&gt;</code> 替换为认知服务帐户的区域</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">curl &quot;https://&lt;region&gt;.api.cognitive.microsoft.com/vision/v2.0/recognizeText?mode=Handwritten&quot; \<br>-H &quot;Ocp-Apim-Subscription-Key: $key&quot; \<br>-H &quot;Content-Type: application/json&quot; \<br>-d &quot;&#123;&#x27;url&#x27; : &#x27;https://raw.githubusercontent.com/MicrosoftDocs/mslearn-process-images-with-the-computer-vision-service/master/images/handwriting.jpg&#x27;&#125;&quot; \<br>-D -<br></code></pre></div></td></tr></table></figure>
+
+<p>上述命令可将此操作的标头转储到控制台。 例如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">HTTP/1.1 202 Accepted<br>Cache-Control: no-cache<br>Pragma: no-cache<br>Content-Length: 0<br>Expires: -1<br>Operation-Location: https://westus2.api.cognitive.microsoft.com/vision/v2.0/textOperations/d0e9b397-4072-471c-ae61-7490bec8f077<br>X-AspNet-Version: 4.0.30319<br>X-Powered-By: ASP.NET<br>apim-request-id: f5663487-03c6-4760-9be7-c9157fac10a1<br>Strict-Transport-Security: max-age=31536000; includeSubDomains; preload<br>x-content-type-options: nosniff<br>Date: Wed, 12 Sep 2018 19:22:00 GMT<br></code></pre></div></td></tr></table></figure>
+
+<p><code>Operation-Location</code> 标头是完成后将发布结果的位置。</p>
+<ol start="2">
+<li>复制 <code>Operation-Location</code> 标头值。</li>
+<li>在 Azure Cloud Shell 中执行以下命令，将 <code>&quot;&lt;Operation-Location&gt;&quot;</code> 替换为上述步骤中复制的 <code>Operation-Location</code> 标头的值。</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">curl -H &quot;Ocp-Apim-Subscription-Key: $key&quot; &quot;&lt;Operation-Location&gt;&quot; | jq &#x27;.&#x27;<br></code></pre></div></td></tr></table></figure>
+<p>如果操作已完成，你将收到包含手写识别请求结果的 <code>JSON</code> 文件</p>
+<p>输出展示：<img src="https://cdn.jsdelivr.net/gh/xX-Hacbox-Xx/Hacbox/pic_bed/blog_pic/OCR.gif" srcset="/img/loading.gif" alt="输出OCR"></p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>计算机视觉 API 是用于处理图像的强大工具。使用此服务，而不是构建你自己的 API，有可能为你节省大量开发和维护成本。 专注于编写业务逻辑来作出业务相关决策，并让计算机视觉 API 从图像中提取丰富的信息，以便分类和处理可视数据。</p>
+<p>在此文档中，我们分析了图像，提取了文本，并生成了缩略图。 为调用计算机视觉 API，我们在 Azure 订阅中创建了认知服务帐户。 此帐户为我们提供调用所需的访问密钥。</p>
+<p>本文仅通过Azure Cloud Shell展示这个API的功能，如果需要在个人项目中调用该API，后续我会再单独写一篇手册，如果等不及的话，可以在<a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/azure/cognitive-services/computer-vision/quickstarts-sdk/client-library?pivots=programming-language-python">微软官方手册</a>中查询有关资料。</p>
+<p>本文部分内容引用自<a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/azure/cognitive-services/computer-vision/quickstarts-sdk/client-library?pivots=programming-language-python">微软官方手册</a>和<a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/learn/modules/create-computer-vision-service-to-classify-images/1-introduction">Microsoft Learn教程</a></p>
+<p><em>写的好累…</em></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Fun/">Fun</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Fun/%E6%8A%80%E6%9C%AF%E5%9E%8B/">技术型</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">技术文档</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%AD%A6%E4%B9%A0%E6%A1%88%E4%BE%8B/">学习案例</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/08/31/fullmarkCompositionGen/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">生活在引擎上</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/08/18/8Queens/">
+                        <span class="hidden-mobile">八皇后问题</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "3RVm1Vb0F15vQvpQgsvTPN2g-gzGzoHsz",
+          app_key: "HJoeIhPQuctkyMBw0xgRlrMW",
+          placeholder: "思想在这里碰撞",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+    
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>
