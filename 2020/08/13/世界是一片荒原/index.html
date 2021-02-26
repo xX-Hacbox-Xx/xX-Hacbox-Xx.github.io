@@ -293,14 +293,14 @@
       Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/@waline/client@0.4.2/dist/Waline.min.js', function () {
         new Waline({
           el: "#waline",
-          placeholder: "说点什么",
+          placeholder: "思想在这里碰撞",
           path: window.location.pathname,
-          avatar: "retro",
+          avatar: "identicon",
           meta: ["nick","mail","link"],
           pageSize: "10",
           lang: "zh-CN",
           highlight: true,
-          serverURL: "https://blogcommentsv2.vercel.app/",
+          serverURL: "https://blogcommentsv2.vercel.app",
           avatarForce: false,
           requiredFields: [],
           emojiCDN: "//i0.hdslb.com/bfs/emote/",
