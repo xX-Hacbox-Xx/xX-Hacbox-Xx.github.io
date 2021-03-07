@@ -8,7 +8,7 @@
 <head>
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
-  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -16,9 +16,12 @@
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   
   <meta name="theme-color" content="#596D76">
-  <meta name="description" content="欢迎来到技术的密港">
+  
+    <meta name="description" content="用什么开始这段旅程？">
+  
   <meta name="author" content="Hackerbox">
   <meta name="keywords" content="Hacbox,C#,unity,c,c++,罐头盒,灰域行者,game">
+  
   <title>Hello World - 灰域行者的罐头盒</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
@@ -57,7 +60,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"hacbox.me","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":100,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"§"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"hacbox.me","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":100,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"§"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -137,6 +140,18 @@
               <a class="nav-link" href="/about/">
                 <i class="iconfont icon-user-fill"></i>
                 关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
               </a>
             </li>
           
@@ -304,7 +319,11 @@
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
               
               
                 <div class="post-prevnext">
@@ -335,6 +354,8 @@
             
               <!-- Comments -->
               <article class="comments" id="comments">
+                
+                  
                 
                 
   <div id="waline"></div>
@@ -384,25 +405,6 @@
 
 <!-- Custom -->
 
-  <div class="col-lg-7 mx-auto nopadding-x-md">
-    <div class="container custom post-custom mx-auto text-center pt-3">
-     <!-- TEST-->
-        <a href="" id="hitokoto_text"></a>
-      <script>
-        fetch('https://v1.hitokoto.cn/?c=d&c=k&c=i&c=a')
-          .then(response => response.json())
-          .then(data => {
-            //console.log(data.hitokoto)
-            const hitokoto = document.getElementById('hitokoto_text');    
-            hitokoto.href = 'https://hitokoto.cn/?uuid=' + data.uuid;
-            hitokoto.innerText = data.hitokoto;
-          })
-          .catch(console.error)
-      </script>
-
-    </div>
-  </div>
-
 
     
 
@@ -440,8 +442,22 @@
   </main>
 
   <footer class="text-center mt-5 py-3">
-  <div class="footer-content">
+  <div class="footer-content text-center">
     
+    <a href="" id="hitokoto_text"></a>
+    <script>
+      fetch('https://v1.hitokoto.cn/?c=d&c=k&c=i&c=a&c=j&c=g')
+        .then(response => response.json())
+        .then(data => {
+          //console.log(data.hitokoto)
+          const hitokoto = document.getElementById('hitokoto_text');    
+          hitokoto.href = 'https://hitokoto.cn/?uuid=' + data.uuid;
+          hitokoto.innerText = data.hitokoto;
+        })
+        .catch(console.error)
+    </script>
+    <br/>
+    <br/>
   </div>
   
   <div class="statistics">
@@ -545,11 +561,12 @@
   <script>
     (function () {
       var path = "/local-search.xml";
-      var inputArea = document.querySelector("#local-search-input");
-      inputArea.onclick = function () {
+      $('#local-search-input').on('click', function() {
         searchFunc(path, 'local-search-input', 'local-search-result');
-        this.onclick = null
-      }
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
     })()
   </script>
 
