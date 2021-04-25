@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>独立游戏开发日志 - Day1</title>
+    <link href="/2021/04/25/UE4day1/"/>
+    <url>/2021/04/25/UE4day1/</url>
+    
+    <content type="html"><![CDATA[<h1 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h1><p>经过这么久的 <em><del>摸鱼</del></em> 学习积累终于开始制作了！目前项目类型还没有完全确定，但是应该是风格化PRG游戏，有技能树和解密元素。</p><blockquote><p>上周换了2根内存条，之前用的贼船对AMD超频优化实在是太烂了，这次换了科赋雷霆的条子，上了3600hz直接起飞~</p></blockquote><p><img src="https://cdn.jsdelivr.net/gh/xX-Hacbox-Xx/Hacbox/pic_bed/blog_pic/IMG_20210420_131345.jpg" alt="雷霆16G"></p><p>16岁的时候就有过很明确的想要从事游戏行业的愿望，这么多年自己也在逐渐从玩家向开发者过渡。在这个月我终于成功进入学校的艺术设计院学习 <em>(工业设计专业)</em> ，虽然并不是和游戏直接相关的专业，但是同院的数字媒体艺术是直接相关，未来可能考虑修一个双学位(前提是精力允许)。</p><p>至于为什么要搞游戏制作，这里就不展开说了，能给你扯一长段抒情散文体自传…毕竟这个文章主要是一个开发日志。</p><p><img src="https://cdn.jsdelivr.net/gh/xX-Hacbox-Xx/Hacbox/pic_bed/blog_pic/20210425213833.png" alt="项目截图"></p><h1 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h1><h2 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h2><ul><li>Win10</li><li>VS 2020</li><li>UE4</li><li>Blender </li></ul><h2 id="项目内容"><a href="#项目内容" class="headerlink" title="项目内容"></a>项目内容</h2><ul><li><p>基本人物角色建立</p><p>包括NPC，玩家都可以通用的一套人物，模型的导入，输入控制配置，行动速度配置等。</p></li></ul><p><img src="https://cdn.jsdelivr.net/gh/xX-Hacbox-Xx/Hacbox/pic_bed/blog_pic/20210425220328.png" alt="角色移动"></p><ul><li>基础移动功能的蓝图实现</li></ul><p>包括控制器（键盘）接收、移动、跳跃、蹲伏和奔跑</p><p><img src="https://cdn.jsdelivr.net/gh/xX-Hacbox-Xx/Hacbox/pic_bed/blog_pic/20210425220628.png" alt="基础移动-蓝图"></p><ul><li>基础HUD的配置</li></ul><p>基础HUD的功能实现，目前包括生命、体力、法力三个数值的进度条展示和功能实现以及体力和奔跑事件的绑定</p><p><img src="https://cdn.jsdelivr.net/gh/xX-Hacbox-Xx/Hacbox/pic_bed/blog_pic/20210425220902.png" alt="HUD-蓝图"></p><h2 id="视频展示"><a href="#视频展示" class="headerlink" title="视频展示"></a>视频展示</h2><p><a href="https://www.bilibili.com/video/BV1Aq4y1J7rq">B站</a></p><iframe src="//player.bilibili.com/player.html?aid=545306595&bvid=BV1Aq4y1J7rq&cid=329163191&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe><h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p>知识浅薄，道阻且长，发这个文章绝非炫耀卖弄，仅仅是自我激励和记录，独立游戏开发是一件非常漫长而艰难的事情，希望这个日志能够一直更新下去！</p><p>也在寻找志同道合的小伙伴一起开发，美术或者程序方向的最好，能力什么的无所谓，只要你有一颗真正热爱游戏的心，就一起来吧！</p><p><strong>我的联系方式在顶端导航栏可以找到，你也可以直接在本文章页留言</strong></p><p><em>祝你前程似锦</em></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>开发日志</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>记录</tag>
+      
+      <tag>开发日志</tag>
+      
+      <tag>笔记</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>小 心 二 次 元</title>
     <link href="/2021/03/20/WeebsIn/"/>
     <url>/2021/03/20/WeebsIn/</url>
@@ -22,9 +51,9 @@
     
     <tags>
       
-      <tag>随笔</tag>
-      
       <tag>记录</tag>
+      
+      <tag>随笔</tag>
       
       <tag>二次元</tag>
       
@@ -51,9 +80,9 @@
     
     <tags>
       
-      <tag>随笔</tag>
-      
       <tag>记录</tag>
+      
+      <tag>随笔</tag>
       
     </tags>
     
@@ -250,9 +279,9 @@
     
     <tags>
       
-      <tag>随笔</tag>
-      
       <tag>记录</tag>
+      
+      <tag>随笔</tag>
       
     </tags>
     
