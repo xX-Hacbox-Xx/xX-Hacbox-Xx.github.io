@@ -4,7 +4,36 @@
   
   
   <entry>
-    <title>独立游戏开发日志 - Day1</title>
+    <title>UE4开发日志 - Day5</title>
+    <link href="/2021/05/03/UE4day5/"/>
+    <url>/2021/05/03/UE4day5/</url>
+    
+    <content type="html"><![CDATA[<h1 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h1><p>终于五一放假啦，利用假期几天学了一下材质编辑与蓝图的基本逻辑</p><p><img src="https://cdn.jsdelivr.net/gh/xX-Hacbox-Xx/Hacbox/pic_bed/blog_pic/20210503200648.png" alt="项目截图2"></p><h1 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h1><h2 id="项目更新内容"><a href="#项目更新内容" class="headerlink" title="项目更新内容"></a>项目更新内容</h2><ul><li><p>材质编辑入门</p><p>如何创建、导入材质，材质的编辑</p></li></ul><p><img src="https://cdn.jsdelivr.net/gh/xX-Hacbox-Xx/Hacbox/pic_bed/blog_pic/20210503200845.png" alt="跟着老师做的金砖"></p><p><img src="https://cdn.jsdelivr.net/gh/xX-Hacbox-Xx/Hacbox/pic_bed/blog_pic/20210503201036.png" alt="2K材质贴图纹理"></p><blockquote><p>贴图等素材来自<a href="https://quixel.com/megascans/home">Megascan</a></p></blockquote><ul><li><p>基本蓝图逻辑</p><p>通过几个材质编辑常用功能节点（常数、Add、Multiply、纹理坐标、Lerp）来介绍蓝图的操作逻辑。</p></li></ul><p><img src="https://cdn.jsdelivr.net/gh/xX-Hacbox-Xx/Hacbox/pic_bed/blog_pic/20210503201340.png" alt="材质编辑-蓝图"></p><h2 id="教程和有关细节"><a href="#教程和有关细节" class="headerlink" title="教程和有关细节"></a>教程和有关细节</h2><p>我是跟着厦门大学文铮老师在B站的公开课进行这次学习的，有需要的小伙伴可以去文铮老师的<a href="https://space.bilibili.com/476595099">B站主页</a>进行学习</p><div style="position:relative; padding-bottom:75%; width:100%; height:0">    <iframe src="//player.bilibili.com/player.html?aid=802086591&bvid=BV1Fy4y1E7b1&cid=309153387&page=3" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position:absolute; height: 100%; width: 100%;"></iframe></div><h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p>知识浅薄，道阻且长。</p><p>这些天也在了解一些有关的行业调查，有一天在B站刷到一个很厉害的中学生做独立游戏的视频：<a href="https://www.bilibili.com/video/BV1Hz411b7B3">点我直达</a></p><p>视频发布于2020年，简介中作者透露自己<em>只有16岁</em></p><p><em>突然感觉我真是个废物</em></p><p><a href="https://space.bilibili.com/179847160">他的B站主页</a></p><p><img src="https://cdn.jsdelivr.net/gh/xX-Hacbox-Xx/Hacbox/pic_bed/blog_pic/20210503202022.png" alt="数字模型个人工作室"></p><p>但引起我思考的不是他的能力，而是他<a href="https://www.bilibili.com/video/BV1VV411q75N">开发总结视频</a>下面的评论区</p><p><img src="https://cdn.jsdelivr.net/gh/xX-Hacbox-Xx/Hacbox/pic_bed/blog_pic/20210503202436.png" alt="来自路人的指点"></p><p>在一个游戏开发过程中，至少需要：</p><ul><li>1个策划</li><li>1~2个美术</li><li>1个程序</li></ul><p>这是最低限度的要求，当然足够厉害的你也可以担当多面手，不过在独立游戏领域这些职位的概念基本是模糊的，因为开发者时间金钱有限，一般都是身兼数职，当然也有小团队跨界成功的案例（比如上海烛龙的古剑3）。</p><p>这个16岁的学生在大多数同龄人里面无疑是优秀的，只不过这个路人的意思仅仅是告诉他游戏不单单只有画面和模型构成。但是个人觉得别人只算是刚刚起步，未来路怎么走也未必就定下来了，毕竟不是所有人都希望进大厂打工，成为游戏工业化的一个齿轮。</p><p>p.s. <a href="https://www.zhihu.com/question/425428330">古剑三核心主创在游戏上线后陆续离职了</a></p><p><img src="https://cdn.jsdelivr.net/gh/xX-Hacbox-Xx/Hacbox/pic_bed/blog_pic/20210503204158.png" alt="古剑三核心主创离职"></p><p><em>祝你前程似锦</em></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>开发日志</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>记录</tag>
+      
+      <tag>开发日志</tag>
+      
+      <tag>笔记</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>UE4开发日志 - Day1</title>
     <link href="/2021/04/25/UE4day1/"/>
     <url>/2021/04/25/UE4day1/</url>
     
